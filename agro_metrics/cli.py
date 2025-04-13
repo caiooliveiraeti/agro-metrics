@@ -39,11 +39,17 @@ def executar():
 
             elif escolha.startswith("3."):
                 area_id = questionary.text("ID da área a remover:").ask()
+                if not area_service.repo.area_existe(area_id):
+                    print(f"⚠️ Área '{area_id}' não encontrada.")
+                    continue
                 area_service.remover_area(area_id)
 
             elif escolha.startswith("4."):
                 tipo = questionary.select("Tipo do sensor:", choices=["umidade", "ph", "ce"]).ask()
                 area_id = questionary.text("ID da área vinculada:").ask()
+                if not area_service.repo.area_existe(area_id):
+                    print(f"⚠️ Área '{area_id}' não encontrada.")
+                    continue
                 codigo_patrimonio = questionary.text("Código de patrimônio do sensor:").ask()
                 sensor_service.adicionar_sensor(tipo, area_id, codigo_patrimonio)
 
@@ -52,10 +58,16 @@ def executar():
 
             elif escolha.startswith("6."):
                 sensor_id = questionary.text("ID do sensor a remover:").ask()
+                if not sensor_service.repo.sensor_existe(sensor_id):
+                    print(f"⚠️ Sensor '{sensor_id}' não encontrado.")
+                    continue
                 sensor_service.remover_sensor(sensor_id)
 
             elif escolha.startswith("7."):
                 codigo_patrimonio = questionary.text("Código de patrimônio do sensor:").ask()
+                if not sensor_service.repo.sensor_codigo_existe(codigo_patrimonio):
+                    print(f"⚠️ Sensor com código de patrimônio '{codigo_patrimonio}' não encontrado.")
+                    continue
                 valor = float(questionary.text("Valor medido:").ask())
                 timestamp = questionary.text("Timestamp (UTC, formato ISO 8601):").ask()
                 sensor_service.cadastrar_metrica(codigo_patrimonio, valor, timestamp)
@@ -66,8 +78,21 @@ def executar():
 
             elif escolha.startswith("9."):
                 area_id = questionary.text("ID da área:").ask()
-                output_csv_path = questionary.text("Caminho para salvar o arquivo CSV:").ask()
-                sensor_service.exportar_medicoes_area(area_id, output_csv_path)
+                if not area_service.repo.area_existe(area_id):
+                    print(f"⚠️ Área '{area_id}' não encontrada.")
+                    continue
+
+                formato = questionary.select(
+                    "Escolha o formato de exportação:",
+                    choices=["CSV", "JSON"]
+                ).ask()
+
+                output_path = questionary.text("Caminho para salvar o arquivo:").ask()
+
+                if formato == "CSV":
+                    sensor_service.exportar_medicoes_area_csv(area_id, output_path)
+                elif formato == "JSON":
+                    sensor_service.exportar_medicoes_area_json(area_id, output_path)
 
             elif escolha.startswith("99."):
                 print("👋 Encerrando...")

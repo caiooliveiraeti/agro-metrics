@@ -2,6 +2,7 @@ import uuid
 from datetime import datetime
 from ...core.repositories.repository_factory import get_repository
 import csv
+import json
 
 class SensorService:
     def __init__(self):
@@ -103,3 +104,34 @@ class SensorService:
                 writer.writerow([leitura["sensor_id"], leitura["codigo_patrimonio"], leitura["valor"], leitura["timestamp"]])
 
         print(f"✅ Medições da área '{area_id}' exportadas com sucesso para '{output_csv_path}'.")
+
+    def _exportar_medicoes(self, area_id: str, output_path: str, formato: str):
+        if not self.repo.area_existe(area_id):
+            raise ValueError(f"Área '{area_id}' não encontrada.")
+
+        if not self.repo.sensores_existem_na_area(area_id):
+            raise ValueError(f"Não há sensores cadastrados para a área '{area_id}'.")
+
+        leituras = self.repo.listar_leituras_por_area(area_id)
+        if not leituras:
+            raise ValueError(f"Não há medições registradas para a área '{area_id}'.")
+
+        if formato == "csv":
+            with open(output_path, mode='w', encoding='utf-8', newline='') as file:
+                writer = csv.writer(file)
+                writer.writerow(["sensor_id", "codigo_patrimonio", "valor", "timestamp"])
+                for leitura in leituras:
+                    writer.writerow([leitura["sensor_id"], leitura["codigo_patrimonio"], leitura["valor"], leitura["timestamp"]])
+        elif formato == "json":
+            with open(output_path, mode='w', encoding='utf-8') as file:
+                json.dump(leituras, file, indent=4, default=str)
+        else:
+            raise ValueError("Formato de exportação inválido. Use 'csv' ou 'json'.")
+
+        print(f"✅ Medições da área '{area_id}' exportadas com sucesso para '{output_path}'.")
+
+    def exportar_medicoes_area_csv(self, area_id: str, output_csv_path: str):
+        self._exportar_medicoes(area_id, output_csv_path, "csv")
+
+    def exportar_medicoes_area_json(self, area_id: str, output_json_path: str):
+        self._exportar_medicoes(area_id, output_json_path, "json")
