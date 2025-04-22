@@ -64,7 +64,7 @@ Com esses dados, agricultores podem tomar decisões informadas sobre irrigação
 
 1. Clone o repositório:
    ```bash
-   git clone <URL_DO_REPOSITORIO>
+   git clone https://github.com/caiooliveiraeti/agro-metrics-cap6.git
    ```
 
 2. Inicie o banco de dados Oracle com Docker:
