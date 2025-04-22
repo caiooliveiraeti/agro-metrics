@@ -7,11 +7,11 @@ REQUIREMENTS=requirements.txt
 # Alvo padrão para rodar o projeto
 run: venv install
 	@set -a; \
-	if [ -f .env-local ]; then \
-		. .env-local; \
+	if [ -f config/.env-local ]; then \
+		. config/.env-local; \
 	fi; \
 	set +a; \
-	$(ACTIVATE) && $(PYTHON) -m agro_metrics
+	$(ACTIVATE) && $(PYTHON) -m src.agro_metrics
 
 # Alvo para criar o ambiente virtual
 venv:

@@ -1,4 +1,24 @@
+# FIAP - Faculdade de Informática e Administração Paulista
+
+<p align="center">
+<a href= "https://www.fiap.com.br/"><img src="assets/logo-fiap.png" alt="FIAP - Faculdade de Informática e Admnistração Paulista" border="0" width=40% height=40%></a>
+</p>
+
+<br>
+
 # Agro Metrics
+
+### Integrantes:
+- <a href="https://www.linkedin.com/in/caiooliveiraeti">Caio Oliveira</a>
+- <a href="https://www.linkedin.com/in/en%C3%A9as-moreira-4bbaab136">Enéas Moreira</a>
+- <a href="https://www.linkedin.com/in/william--xavier">William Xavier</a> 
+
+## 👩‍🏫 Professores:
+### Tutor(a) 
+- <a href="https://www.linkedin.com/in/lucas-gomes-moreira-15a8452a/">Lucas Gomes</a>
+### Coordenador(a)
+- <a href="https://www.linkedin.com/in/andregodoichiovato/">Andre Godoi</a>
+
 
 O **Agro Metrics** é um sistema de linha de comando para a gestão de sensores agrícolas e o processamento de leituras. Ele permite o gerenciamento de áreas, sensores e medições, além de importar e exportar dados em formato CSV ou JSON.
 
@@ -35,18 +55,16 @@ Com esses dados, agricultores podem tomar decisões informadas sobre irrigação
    - Sensores de condutividade elétrica medem a concentração de nutrientes no solo.
    - As leituras ajudam a ajustar a quantidade de fertilizantes aplicados, evitando desperdício e contaminação ambiental.
 
-## Requisitos
+## Requisitos para executar o código
 
 - Python 3.8 ou superior
 - Banco de dados Oracle (configurado via `docker-compose.yml`)
-- Dependências Python (listadas em `requirements.txt`)
 
-## Instalação
+## 🔧 Como executar o código
 
 1. Clone o repositório:
    ```bash
    git clone <URL_DO_REPOSITORIO>
-   cd agro_metrics
    ```
 
 2. Inicie o banco de dados Oracle com Docker:
@@ -67,27 +85,7 @@ Siga as instruções no terminal para realizar as operações desejadas.
 
 ## Estrutura do Projeto
 
-- **`agro_metrics/core/services`**: Contém a lógica de negócios para áreas e sensores.
-- **`agro_metrics/core/repositories`**: Implementa a comunicação com o banco de dados Oracle.
-- **`agro_metrics/cli.py`**: Implementa a interface de linha de comando.
-- **`database/*`**: Script para criar, e popular as tabelas no banco de dados.
-
-## Contribuindo
-
-Contribuições são bem-vindas! Siga os passos abaixo para contribuir:
-
-1. Faça um fork do repositório.
-2. Crie uma branch para sua feature ou correção:
-   ```bash
-   git checkout -b minha-feature
-   ```
-3. Faça suas alterações e adicione os commits:
-   ```bash
-   git add .
-   git commit -m "Descrição da minha feature"
-   ```
-4. Envie suas alterações para o repositório remoto:
-   ```bash
-   git push origin minha-feature
-   ```
-5. Abra um Pull Request no repositório original.
+- **`src/agro_metrics/core/services`**: Contém a lógica de negócios para áreas e sensores.
+- **`src/agro_metrics/core/repositories`**: Implementa a comunicação com o banco de dados Oracle.
+- **`src/agro_metrics/cli.py`**: Implementa a interface de linha de comando.
+- **`scripts/database/*`**: Script para criar, e popular as tabelas no banco de dados.
