@@ -102,28 +102,28 @@ O banco de dados do **Agro Metrics** foi projetado para gerenciar áreas agríco
 ```mermaid
 erDiagram
     AREAS {
-        VARCHAR2(36) area_id PK
-        VARCHAR2(255) nome
+        VARCHAR2 area_id PK
+        VARCHAR2 nome
         FLOAT latitude
         FLOAT longitude
     }
     SENSORES {
-        VARCHAR2(36) sensor_id PK
-        VARCHAR2(50) tipo
-        VARCHAR2(36) area_id FK
+        VARCHAR2 sensor_id PK
+        VARCHAR2 tipo
+        VARCHAR2 area_id FK
         FLOAT latitude
         FLOAT longitude
-        NUMBER(1) ativo
-        VARCHAR2(50) codigo_patrimonio UNIQUE
+        NUMBER ativo
+        VARCHAR2 codigo_patrimonio UNIQUE
     }
     LEITURAS {
         NUMBER leitura_id PK
-        VARCHAR2(36) sensor_id FK
+        VARCHAR2 sensor_id FK
         FLOAT valor
         TIMESTAMP timestamp
     }
-    AREAS ||--o{ SENSORES : "possui"
-    SENSORES ||--o{ LEITURAS : "registra"
+    AREAS ||--o{ SENSORES : possui
+    SENSORES ||--o{ LEITURAS : registra
 ```
 
 ### Motivo da Escolha do Modelo
