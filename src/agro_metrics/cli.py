@@ -19,6 +19,7 @@ def executar():
                 "7. Cadastrar Leitura",
                 "8. Importar Leituras de CSV",
                 "9. Exportar Leituras de uma Área",
+                "10. Conectar Sensores",
                 "99. Sair"
             ]
         ).ask()
@@ -93,6 +94,37 @@ def executar():
                     sensor_service.exportar_medicoes_area_csv(area_id, output_path)
                 elif formato == "JSON":
                     sensor_service.exportar_medicoes_area_json(area_id, output_path)
+
+            elif escolha.startswith("10."):
+                area_id = questionary.text("ID da área:").ask()
+                if not area_service.repo.area_existe(area_id):
+                    print(f"⚠️ Área '{area_id}' não encontrada.")
+                    continue
+
+                sensores = {
+                    "umidade": questionary.text("Código de patrimônio do sensor de umidade:").ask(),
+                    "ph": questionary.text("Código de patrimônio do sensor de pH:").ask(),
+                    "p": questionary.text("Código de patrimônio do sensor de fósforo (P):").ask(),
+                    "f": questionary.text("Código de patrimônio do sensor de potássio (F):").ask(),
+                }
+
+                # Filtrar sensores com código de patrimônio vazio
+                sensores = {tipo: codigo for tipo, codigo in sensores.items() if codigo}
+
+                if not sensores:
+                    print("⚠️ Nenhum sensor válido foi informado.")
+                    continue
+
+                for tipo, codigo in sensores.items():
+                    if not sensor_service.repo.sensor_existe_na_area(codigo, area_id):
+                        print(f"⚠️ Sensor '{codigo}' ({tipo}) não encontrado na área '{area_id}'.")
+                        break
+                else:
+                    serial_url = questionary.text("Serial url (ex: rfc2217://localhost:4400)").ask()
+                    try:
+                        sensor_service.conectar_sensores(area_id, sensores, serial_url)
+                    except Exception as e:
+                        print(f"⚠️ Erro ao conectar sensores: {e}")
 
             elif escolha.startswith("99."):
                 print("👋 Encerrando...")

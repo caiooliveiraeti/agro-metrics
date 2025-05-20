@@ -135,3 +135,40 @@ class SensorService:
 
     def exportar_medicoes_area_json(self, area_id: str, output_json_path: str):
         self._exportar_medicoes(area_id, output_json_path, "json")
+
+    def conectar_sensores(self, area_id: str, sensores: dict, serial_url: str):
+        for tipo, codigo_patrimonio in sensores.items():
+            if not self.repo.sensor_existe_na_area(codigo_patrimonio, area_id):
+                raise ValueError(f"Sensor '{codigo_patrimonio}' ({tipo}) não encontrado na área '{area_id}'.")
+
+        print("📡 Conectando à serial...")
+        try:
+            import serial
+            with serial.serial_for_url(serial_url, baudrate=115200) as ser:
+                print("✅ Conexão estabelecida. Pressione Ctrl+C para encerrar.")
+                while True:
+                    try:
+                        linha = ser.readline().decode("utf-8").strip()
+                        if linha.startswith("DATA:"):
+                            dados = {
+                                item.split("=")[0]: item.split("=")[1]
+                                for item in linha.replace("DATA:", "").split(",")
+                            }
+                            for tipo, codigo_patrimonio in sensores.items():
+                                valor = None
+                                if tipo == "umidade":
+                                    valor = float(dados.get("H", -1))
+                                elif tipo == "ph":
+                                    valor = float(dados.get("PH", -1))
+                                elif tipo == "p":
+                                    valor = int(dados.get("P", 0))
+                                elif tipo == "f":
+                                    valor = int(dados.get("K", 0))
+
+                                if valor is not None:
+                                    self.cadastrar_metrica(codigo_patrimonio, valor, datetime.utcnow().isoformat())
+                    except KeyboardInterrupt:
+                        print("\n👋 Conexão encerrada pelo usuário.")
+                        break
+        except Exception as e:
+            raise RuntimeError(f"Erro ao conectar à serial: {e}")

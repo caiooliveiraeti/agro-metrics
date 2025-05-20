@@ -64,6 +64,29 @@ No modo de decisão externa, o sistema aguarda comandos via Serial para ativar o
 
 ---
 
-Se quiser visualizar no Python apenas os dados dos sensores, basta filtrar por linhas começadas em `DATA:`!
+### Como executar no VS Code usando Wokwi e PlatformIO
 
----
+1. **Instale as extensões necessárias**:
+   - Certifique-se de que as extensões `PlatformIO IDE` e `Wokwi` estão instaladas no VS Code.  
+     Você pode instalá-las diretamente na aba de extensões do VS Code.
+
+2. **Abra o projeto no VS Code**:
+   - Navegue até o diretório do simulador:
+     ```bash
+     cd sensores/simulador
+     ```
+   - Abra o diretório no VS Code:
+     ```bash
+     code .
+     ```
+
+3. **Compile e carregue o firmware**:
+   - Na barra lateral do PlatformIO, clique em **Build** para compilar o código.
+
+4. **Inicie o simulador no Wokwi**:
+   - Clique no arquivo `diagram.json` e selecione **Start Wokwi Simulator**.
+   - O Wokwi iniciará no simulador com o circuito.
+
+5. **Teste o simulador**:
+   - Use os botões e sensores no Wokwi para simular leituras e interagir com o sistema.
+   - Monitore os logs e dados enviados pelo simulador no monitor serial.

@@ -17,7 +17,6 @@
 ### Coordenador(a)
 - <a href="https://www.linkedin.com/in/andregodoichiovato/">Andre Godoi</a>
 
-
 O **Agro Metrics** é um sistema de linha de comando para a gestão de sensores agrícolas e o processamento de leituras. Ele permite o gerenciamento de áreas, sensores e medições, além de importar e exportar dados em formato CSV ou JSON.
 
 ## Impacto no Agronegócio
@@ -34,9 +33,16 @@ Com esses dados, agricultores podem tomar decisões informadas sobre irrigação
 
 - **Gerenciamento de Áreas**: Adicionar, listar e remover áreas agrícolas.
 - **Gerenciamento de Sensores**: Adicionar, listar e remover sensores vinculados a áreas.
+- **Conexão de Sensores**: Conectar sensores para registrar leituras em tempo real.
 - **Registro de Leituras**: Cadastrar medições para sensores.
 - **Importação de Leituras**: Importar medições de sensores a partir de arquivos CSV.
 - **Exportação de Leituras**: Exportar todas as medições de uma área para arquivos CSV ou JSON.
+
+## Simulador de Sensores
+
+O projeto inclui um simulador de sensores desenvolvido no Wokwi para testar a integração com o sistema. O simulador utiliza um ESP32 para simular sensores de umidade, pH, fósforo e potássio, além de um relé para controle de irrigação.
+
+Para mais detalhes, consulte o [README do simulador](sensores/simulador/README.md).
 
 ## Exemplos de Uso Prático
 
@@ -87,3 +93,4 @@ Siga as instruções no terminal para realizar as operações desejadas.
 - **`src/agro_metrics/core/repositories`**: Implementa a comunicação com o banco de dados Oracle.
 - **`src/agro_metrics/cli.py`**: Implementa a interface de linha de comando.
 - **`scripts/database/*`**: Script para criar, e popular as tabelas no banco de dados.
+- **`sensores/simulador`**: Contém o simulador de sensores desenvolvido no Wokwi.

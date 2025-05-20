@@ -33,3 +33,10 @@ INSERT INTO leituras (sensor_id, valor) VALUES ('550e8400-e29b-41d4-a716-4466554
 INSERT INTO leituras (sensor_id, valor) VALUES ('550e8400-e29b-41d4-a716-44665544000a', 6.9);
 INSERT INTO leituras (sensor_id, valor) VALUES ('550e8400-e29b-41d4-a716-44665544000b', 1.8);
 INSERT INTO leituras (sensor_id, valor) VALUES ('550e8400-e29b-41d4-a716-44665544000b', 1.9);
+
+-- Sensores para Área 4
+INSERT INTO areas (area_id, nome, latitude, longitude) VALUES ('550e8400-e29b-41d4-a716-446655440001', 'Área 4', -23.5505, -46.6333);
+INSERT INTO sensores (sensor_id, tipo, area_id, latitude, longitude, ativo, codigo_patrimonio) VALUES ('550e8400-e29b-41d4-a716-446655440013', 'umidade', '550e8400-e29b-41d4-a716-446655440001', -23.5505, -46.6333, 1, '223001');
+INSERT INTO sensores (sensor_id, tipo, area_id, latitude, longitude, ativo, codigo_patrimonio) VALUES ('550e8400-e29b-41d4-a716-446655440014', 'ph', '550e8400-e29b-41d4-a716-446655440001', -23.5505, -46.6333, 1, '223002');
+INSERT INTO sensores (sensor_id, tipo, area_id, latitude, longitude, ativo, codigo_patrimonio) VALUES ('550e8400-e29b-41d4-a716-446655440015', 'p', '550e8400-e29b-41d4-a716-446655440001', -23.5505, -46.6333, 1, '223003');
+INSERT INTO sensores (sensor_id, tipo, area_id, latitude, longitude, ativo, codigo_patrimonio) VALUES ('550e8400-e29b-41d4-a716-446655440016', 'f', '550e8400-e29b-41d4-a716-446655440001', -23.5505, -46.6333, 1, '223004');

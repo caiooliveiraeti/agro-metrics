@@ -165,3 +165,14 @@ class OracleRepository:
         ))
         self.conn.commit()
         cursor.close()
+
+    def sensor_existe_na_area(self, codigo_patrimonio, area_id):
+        cursor = self.conn.cursor()
+        cursor.execute("""
+            SELECT COUNT(*)
+            FROM sensores
+            WHERE codigo_patrimonio = :1 AND area_id = :2
+        """, [codigo_patrimonio, area_id])
+        result = cursor.fetchone()[0]
+        cursor.close()
+        return result > 0
