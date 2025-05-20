@@ -26,14 +26,14 @@
       "id": "btn1",
       "top": 275,
       "left": 38.4,
-      "attrs": { "color": "green", "xray": "1" }
+      "attrs": { "color": "green", "xray": "1", "label": "Fósforo" }
     },
     {
       "type": "wokwi-pushbutton",
       "id": "btn2",
       "top": 207.8,
       "left": 38.4,
-      "attrs": { "color": "green", "xray": "1" }
+      "attrs": { "color": "green", "xray": "1", "label": "Potássio" }
     },
     { "type": "wokwi-vcc", "id": "vcc1", "top": 365.56, "left": 700.8, "attrs": {} },
     { "type": "wokwi-gnd", "id": "gnd1", "top": 470.4, "left": 786.6, "attrs": {} },

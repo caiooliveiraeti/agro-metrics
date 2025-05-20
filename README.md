@@ -10,8 +10,6 @@
 
 ### Integrantes:
 - <a href="https://www.linkedin.com/in/caiooliveiraeti">Caio Oliveira</a>
-- <a href="https://www.linkedin.com/in/en%C3%A9as-moreira-4bbaab136">Enéas Moreira</a>
-- <a href="https://www.linkedin.com/in/william--xavier">William Xavier</a> 
 
 ## 👩‍🏫 Professores:
 ### Tutor(a) 
