@@ -114,7 +114,7 @@ erDiagram
         FLOAT latitude
         FLOAT longitude
         NUMBER ativo
-        VARCHAR2 codigo_patrimonio UNIQUE
+        VARCHAR2 codigo_patrimonio UK
     }
     LEITURAS {
         NUMBER leitura_id PK
