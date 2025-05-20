@@ -2,3 +2,10 @@ __pycache__/
 *.pyc
 .env
 .venv
+
+
+/sensores/**/.pio
+/sensores/**/.vscode/.browse.c_cpp.db*
+/sensores/**/.vscode/c_cpp_properties.json
+/sensores/**/.vscode/launch.json
+/sensores/**/.vscode/ipch
