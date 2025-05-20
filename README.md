@@ -94,3 +94,54 @@ Siga as instruções no terminal para realizar as operações desejadas.
 - **`src/agro_metrics/cli.py`**: Implementa a interface de linha de comando.
 - **`scripts/database/*`**: Script para criar, e popular as tabelas no banco de dados.
 - **`sensores/simulador`**: Contém o simulador de sensores desenvolvido no Wokwi.
+
+## Modelo Entidade-Relacionamento (MER)
+
+O banco de dados do **Agro Metrics** foi projetado para gerenciar áreas agrícolas, sensores e as leituras realizadas por esses sensores. Abaixo está o MER que representa a estrutura do banco de dados:
+
+```mermaid
+erDiagram
+    AREAS {
+        VARCHAR2 area_id PK
+        VARCHAR2 nome
+        FLOAT latitude
+        FLOAT longitude
+    }
+    SENSORES {
+        VARCHAR2 sensor_id PK
+        VARCHAR2 tipo
+        VARCHAR2 area_id FK
+        FLOAT latitude
+        FLOAT longitude
+        NUMBER ativo
+        VARCHAR2 codigo_patrimonio UK
+    }
+    LEITURAS {
+        NUMBER leitura_id PK
+        VARCHAR2 sensor_id FK
+        FLOAT valor
+        TIMESTAMP timestamp
+    }
+    AREAS ||--o{ SENSORES : possui
+    SENSORES ||--o{ LEITURAS : registra
+```
+
+### Motivo da Escolha do Modelo
+
+1. **Modularidade e Clareza**:
+   - O modelo separa as entidades em tabelas distintas (`areas`, `sensores`, `leituras`), garantindo modularidade e facilitando a manutenção.
+
+2. **Relacionamentos Claros**:
+   - Cada sensor está vinculado a uma área (`area_id` como chave estrangeira em `sensores`).
+   - Cada leitura está vinculada a um sensor (`sensor_id` como chave estrangeira em `leituras`).
+
+3. **Integridade Referencial**:
+   - O uso de chaves estrangeiras (`FK`) garante que sensores só podem ser associados a áreas existentes e leituras só podem ser registradas para sensores válidos.
+
+4. **Escalabilidade**:
+   - O modelo permite a expansão para novas áreas, sensores e leituras sem necessidade de alterações significativas na estrutura.
+
+5. **Unicidade e Controle**:
+   - O campo `codigo_patrimonio` em `sensores` é único, garantindo que cada sensor tenha um identificador exclusivo.
+
+Esse modelo foi escolhido para atender às necessidades do sistema, garantindo consistência nos dados e facilidade de integração com o sistema de sensores e o simulador.
